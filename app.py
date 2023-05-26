@@ -1,6 +1,7 @@
 import streamlit as st
 from data.global_stats import get_global_stats, get_table_data
 
+print("Esta es la buena")
 
 def input_page():
     # Add input elements here
