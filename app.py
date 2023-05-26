@@ -5,18 +5,19 @@ print("Esta es la buena Branch  Pagina-Inicio")
 
 def input_page():
     # Add input elements here
-    table_data = get_table_data()
+    table_data = "Pez"
+    equipo = "juan"
     with open("templates/team_select.html", "r") as f:
         html = f.read()
         html = html.replace("{{variable}}", "Select a team")
-        html = html.replace("{{table_data", table_data)
+        html = html.replace("{{table_data}}", table_data)
         st.markdown(html, unsafe_allow_html=True)
     with open("design/style.css", "r") as f:
         css = f.read()
         st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
     team = st.text_input("Enter your team: ")
-    if st.button("Submit"):
-        st.session_state.team = team
+    if st.button(f"{equipo}"):
+        st.session_state.team = equipo
         st.experimental_set_query_params(page="output")
         st.experimental_rerun()
 
