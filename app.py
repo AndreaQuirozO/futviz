@@ -1,7 +1,7 @@
 import streamlit as st
 from data.global_stats import get_global_stats, get_table_data
 
-print("Esta es la buena")
+print("Esta es la buena Branch  Pagina-Inicio")
 
 def input_page():
     # Add input elements here
