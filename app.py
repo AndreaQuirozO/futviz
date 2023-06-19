@@ -1,54 +1,47 @@
 import streamlit as st
-from data.global_stats import get_global_stats, get_table_data
-
-print("Esta es la buena Branch  Pagina-Inicio")
-
-def input_page():
-    # Add input elements here
-    table_data = "Pez"
-    equipo = "juan"
-    with open("templates/team_select.html", "r") as f:
-        html = f.read()
-        html = html.replace("{{variable}}", "Select a team")
-        html = html.replace("{{table_data}}", table_data)
-        st.markdown(html, unsafe_allow_html=True)
-    with open("design/style.css", "r") as f:
-        css = f.read()
-        st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
-    team = st.text_input("Enter your team: ")
-    if st.button(f"{equipo}"):
-        st.session_state.team = equipo
-        st.experimental_set_query_params(page="output")
-        st.experimental_rerun()
+from data.global_stats import global_data
+import page_controler.main_page
 
 
-def output_page():
-    # Load input data from session state
-    team = st.session_state.get("team", default=None)
-    team = get_global_stats(team)
-    if team:
-        # Display output using input data
-        with open("templates/selected_team.html", "r") as f:
-            html = f.read()
-            html = html.replace("{{variable}}", team[0])
-            st.markdown(html, unsafe_allow_html=True)
-        with open("design/style.css", "r") as f:
-            css = f.read()
-            css = css.replace("--color", team[1])
-            st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
-    else:
-        st.experimental_set_query_params(page="input")
-        st.experimental_rerun()
+def columns():
+    df = global_data()
+    txt = ""
+    for i in df.columns:
+        txt += f"""<th>
+            {i}
+        </th>"""
+    return txt
+
+
+def get_rows():
+    df = global_data()
+    txt = ""
+    for i in range(len(df)):
+        txt += "<tr>"
+        for j in df.columns:
+            if j == "Team":
+                txt += f"""<td>
+                <a href="/table?team={df[j].iloc[i]}" target="_self" class="equipo_row">
+                    {df[j].iloc[i]}
+                </a>"""
+            else:
+                txt += f"""<td>
+                    {df[j].iloc[i]}
+                </td>"""
+        txt += "</tr>"
+    return txt
 
 
 def main():
-    # Define page routing based on URL query parameters
-    st.set_page_config(layout="wide")
-    page = st.experimental_get_query_params().get("page", ["input"])[0]
-    if page == "input":
-        input_page()
-    elif page == "output":
-        output_page()
+    st.set_page_config(layout="wide", page_title="FUTVIZ")
+    html, css = page_controler.main_page.page("input")
+    cols = columns()
+    rows = get_rows()
+    html = html.replace("{{variable}}", "Premier League")
+    html = html.replace("{{ info_columns }}", cols)
+    html = html.replace("{{ info_rows }}", rows)
+    st.markdown(html, unsafe_allow_html=True)
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
 
 if __name__ == "__main__":

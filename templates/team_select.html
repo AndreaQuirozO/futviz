@@ -1,9 +1,11 @@
 <h1>{{variable}}</h1>
 <div class="container">
     <div class="table">
-        {{table_data}}
-    </div>
-    <div class="overview">
-        {{overview_data}}
+        <table>
+            <tr>
+                {{ info_columns }}
+            </tr>
+            {{ info_rows }}
+        </table>
     </div>
 </div>

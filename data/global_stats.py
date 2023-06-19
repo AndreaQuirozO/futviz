@@ -1,29 +1,53 @@
 import pandas as pd
 
-# Made a df with the team name color, and url
+
 df = pd.DataFrame(
     {
-        "team": ["chelsea", "juan", "diego"],
+        "name": ["Chelsea", "Arsenal", "Manchester Utd"],
         "color": ["Blue", "#00FF00", "#0000FF"],
-        "url": ["https://www.google.com", "https://www.google.com", "https://www.google.com"]
+        "logo_url": ["https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/1200px-Chelsea_FC.svg.png",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png"],
+        "shirt_url": ["https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/1200px-Chelsea_FC.svg.png",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png"],
+        "goalkeeper_url": ["https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/1200px-Chelsea_FC.svg.png",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png"]
+
     })
 
 
+class Team:
+    def __init__(self, team_df):
+        self.name = team_df["name"].iloc[0]
+        self.logo_url = team_df["logo_url"].iloc[0]
+        self.color = team_df["color"].iloc[0]
+        self.shirt_url = team_df["shirt_url"].iloc[0]
+        self.goalkeeper_url = team_df["goalkeeper_url"].iloc[0]
+
+    def get_name(self):
+        return self.name
+
+    def get_logo_url(self):
+        return self.logo_url
+
+    def get_color(self):
+        return self.color
+
+    def get_shirt_url(self):
+        return self.shirt_url
+
+    def get_goalkeeper_url(self):
+        return self.goalkeeper_url
+
+
 def global_data():
-    prem = pd.read_html("https://fbref.com/es/comps/9/Estadisticas-de-Premier-League")
-    prem = pd.DataFrame(prem[0])
-    prem = prem.drop(
-        ['Pts/PJ', 'xG', 'xGA', 'xGD', 'xGD/90', 'Asistencia', 'Máximo Goleador del Equipo', 'Portero', 'Notas'],
-        axis=1)
+    prem = pd.read_csv("data/export.csv")
     return prem
 
 
 def get_global_stats(team):
-    # Get the color and url from the df
-    color = df[df["team"] == team]["color"].values[0]
-    url = df[df["team"] == team]["url"].values[0]
-    return team, color, url
-
-
-def get_table_data():
-    return 0
+    team_df = df[df["name"] == team]
+    team = Team(team_df)
+    return team

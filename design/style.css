@@ -183,3 +183,65 @@ footer {
     grid-column: 2;
     grid-row: 1;
 }
+
+.css-b3z5c9{
+    background-color: green;
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.css-1cypcdb{
+    display: none;
+}
+
+    .table {
+      width: 100%; /* Ancho de ejemplo para el contenedor */
+      border: 1px solid black; /* Borde de ejemplo para el contenedor */
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+    }
+
+   th {
+      background-color: #020b77;
+       text-align: center;
+   }
+
+    tr:nth-child(even) {
+      background-color: #292931;
+    }
+
+tr:hover,
+tr:hover th,
+th:hover {
+  background-color: #000000;
+}
+
+td:hover {
+  background-color: #00227e;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+tr:hover td:first-child,
+tr:hover th:first-child {
+  background-color: #000080;
+  color: white;
+}
