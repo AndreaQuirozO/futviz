@@ -11,7 +11,7 @@ def get_data_lollipop():
 
 #Comparación entre goles a favor y goles esperados a favor (desempeño ofensivo)
 def lollipop_att():
-    ordered_gf, ran = get_data_lollipop()
+    ordered_gf, ordered_gc, ran = get_data_lollipop()
     plt.hlines(y=ran, xmin=ordered_gf['GF'], xmax=ordered_gf['xG'], color='grey', alpha=0.4)
     plt.scatter(ordered_gf['GF'], ran, color='skyblue', alpha=1, label='GF')
     plt.scatter(ordered_gf['xG'], ran, color='green', alpha=0.4 , label='xG')
@@ -22,7 +22,7 @@ def lollipop_att():
 
 #Comparación entre goles en contra y goles esperados en contra (desempeño defensivo)
 def lollipop_def():
-    ordered_gc, ran = get_data_lollipop()
+    ordered_gf, ordered_gc, ran = get_data_lollipop()
     plt.hlines(y=ran, xmin=ordered_gc['GC'], xmax=ordered_gc['xGA'], color='grey', alpha=0.4)
     plt.scatter(ordered_gc['GC'], ran, color='red', alpha=1, label='GC')
     plt.scatter(ordered_gc['xGA'], ran, color='grey', alpha=0.4 , label='xGA')
