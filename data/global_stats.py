@@ -13,7 +13,7 @@ def global_data():
     prem = pd.read_html("https://fbref.com/es/comps/9/Estadisticas-de-Premier-League")
     prem = pd.DataFrame(prem[0])
     prem = prem.drop(
-        ['Pts/PJ', 'xG', 'xGA', 'xGD', 'xGD/90', 'Asistencia', 'Máximo Goleador del Equipo', 'Portero', 'Notas'],
+        ['Pts/PJ', 'xGD', 'xGD/90', 'Asistencia', 'Máximo Goleador del Equipo', 'Portero', 'Notas'],
         axis=1)
     return prem
 
